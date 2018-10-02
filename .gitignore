@@ -9,6 +9,11 @@
 # production
 /build
 
+# api
+/api/vendor/
+/api/logs/*
+!/api/logs/README.md
+
 # misc
 .DS_Store
 .env.local
