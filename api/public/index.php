@@ -45,9 +45,12 @@ $app->run();
 
 
 
-function obtenerColonos($response) {
+function obtenerColonos($request) {
     global $conn;
-    $sql = "SELECT * FROM colonos";
+    $emp = json_decode($request->getBody());
+    $estado = $request->getAttribute('estado');
+    $grupo = $request->getAttribute('grupo');
+    $sql = filterByStatusOrGroup($sql,$estado,$grupo);
     $res = array();
     $acentos = mysqli_query($conn,"SET NAMES 'utf8'");
 
@@ -58,53 +61,112 @@ function obtenerColonos($response) {
         $row_array['estado'] = $row['estado'];
         $row_array['semana1'] = $row['semana1'];
         $row_array['semana2'] = $row['semana2'];
-        $row_array['grupo'] = 'Grupo '.$row['grupo'];
+        $row_array['grupo'] = $row['grupo'];
         $row_array['ingresado'] = $row['ts'];
         array_push($res,$row_array);
        }
      }
     mysqli_close($conn);
-    echo json_encode(cleanUpNames($res), JSON_PRETTY_PRINT);
+    echo json_encode(cleanUp($res), JSON_PRETTY_PRINT);
 }
 
-function cleanUpNames($res){
+function filterByStatusOrGroup($sql,$estado,$grupo){
+    $toAdd = '';
+    if($estado == 'todos')
+        {
+            $foo = true;
+        }
+    else
+        {
+            $foo = false;
+            $toAdd = ' WHERE estado='.$estado;
+        }
+    //Si
+    if($foo)
+    {
+        if($grupo != 'todos')
+        {
+            $toAdd = ' WHERE grupo='.$grupo;
+        }
+    }else{
+        if($grupo != 'todos')
+        {
+            $toAdd = ' AND grupo='.$grupo;
+        }
+    }
+    return $sql = "SELECT id, nombre, apellido, estado, grupo, semana1, semana2, ts FROM colonos".$toAdd;
+}
 
-        $jsonValues = ['js','jc','null'];
-        $newValues = ['Jornada Simple','Jornada Completa','No Asiste'];
+function obtenerColono($request) {
+    global $conn;
+    $emp = json_decode($request->getBody());
+    $id = $request->getAttribute('id');
 
-        //loop over the array
-        foreach ($res as $index => $entry) {
-
-            // loop over every attribute
-            foreach ($entry as $entryIndex => $value) {
-                // dealing with names
-                if($entryIndex == 'nombre'){
-                    $value = ucwords(strtolower($value));
-                    $res[$index][$entryIndex] = $value;
-                }
-                // dealing with states
-                if($entryIndex == 'estado'){
-                    $value = returnStatus($value);
-                    $res[$index][$entryIndex] = $value;
-                }
-                //dealing with weeks
-                if($entryIndex == 'semana1' || 'semana2'){
-                    //replace the value and save it back to the array
-                    $res[$index][$entryIndex] = str_replace($jsonValues, $newValues, $value);
-                }
-
-                }
-            }
-
-        return $res;
+    if(is_numeric($id)){
+        $sql = "SELECT id, nombre, apellido, estado, grupo, semana1, semana2, ts FROM colonos WHERE id=".$id;
+    } else{
+        $sql = "SELECT id, nombre, apellido, estado, grupo, semana1, semana2, ts FROM colonos WHERE nombre='".$id."' OR apellido='".$id."'";
     }
 
-function cleanUpNamesB($res){
-    $jsonvalues   = array("js", "jc", "null");
-    $newvalues = array("Jornada Simple", "Jornada Completa", "No asiste");
+    $res = array();
+    $acentos = mysqli_query($conn,"SET NAMES 'utf8'");
 
-    $res = str_replace($jsonvalues, $newvalues, $res);
+    if ($result = mysqli_query( $conn, $sql )){
+        while ($row = mysqli_fetch_assoc($result)) {
+        $row_array['id'] = $row['id'];
+        $row_array['nombre'] = $row['nombre'].' '.$row['apellido'];
+        $row_array['estado'] = $row['estado'];
+        $row_array['semana1'] = $row['semana1'];
+        $row_array['semana2'] = $row['semana2'];
+        $row_array['grupo'] = $row['grupo'];
+        $row_array['ingresado'] = $row['ts'];
+        array_push($res,$row_array);
+       }
+     }
+
+    if ($res != null){
+    mysqli_close($conn);
+    echo json_encode(cleanUp($res), JSON_PRETTY_PRINT);
+    }else{
+        echo 'No existe';
+    }
+}
+
+//Cleaning
+
+function cleanUp($res){
+    //loop over the array
+    foreach ($res as $index => $entry) {
+
+        // loop over every attribute
+        foreach ($entry as $entryIndex => $value) {
+            // preparing data
+            $res[$index][$entryIndex] = byField($entryIndex, $value);
+            }
+        }
     return $res;
+}
+
+function byField($entryIndex,$value){
+    // Dealing with names
+    if($entryIndex == 'nombre'){
+        $value = ucwords(strtolower($value));
+    }
+    // Dealing with states
+    if($entryIndex == 'estado'){
+        $value = returnStatus($value);
+    }
+    // Dealing with groups
+    if($entryIndex == 'grupo'){
+        $value = returnGroup($value);
+    }
+    // Dealing with weeks
+    if($entryIndex == 'semana1' || 'semana2'){
+        $jsonValues = ['js','jc','null'];
+        $newValues = ['Jornada Simple','Jornada Completa','No Asiste'];
+        $value = str_replace($jsonValues, $newValues, $value);
+    }
+    return $value;
 }
 
 function returnStatus($value){
@@ -119,8 +181,20 @@ function returnStatus($value){
             $value = "Denegado";
         break;
         case 3:
-            $value = "En lista de espera";
+            $value = "En Espera";
         break;
     }
     return $value;
+}
+
+function returnGroup($value){
+    switch ($value){
+        default:
+            $value = 'Grupo '.$value;
+        break;
+        case 0:
+            $value = 'No Asignado';
+        break;
+        }
+        return $value;
 }

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import eraseIcon from "./assets/Icon/Erase.png";
 import searchIcon from "./assets/Icon/Search.png";
+import classNames from "classnames";
 
 const Container = styled.ul`
   width: 100%;
@@ -36,9 +37,7 @@ const Container = styled.ul`
     min-height: 30px;
     line-height: 30px;
     color: white;
-    background-color: #80ec71;
     border-radius: 18px;
-    box-shadow: 0 0 3px 0 #b9eab2;
   }
   li:nth-child(4) {
     width: 12%;
@@ -88,14 +87,50 @@ const Container = styled.ul`
       background-color: #ff8787;
     }
   }
+
+  .wait {
+    background-color: #f7bd33;
+    box-shadow: 0 0 3px 0 #f5a623;
+  }
+
+  .approved {
+    background-color: #53d640;
+    box-shadow: 0 0 3px 0 #b9eab2;
+  }
+
+  .denied {
+    background-color: #e25a5a;
+    box-shadow: 0 0 3px 0 #d0021b;
+  }
+
+  .pending {
+    background-color: #87c6ff;
+    box-shadow: 0 0 3px 0 #60c5fa;
+  }
 `;
 class TableRow extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      statusClass: this.computeClass(this.props.estado)
+    };
+  }
+
+  computeClass(val) {
+    return classNames({
+      wait: val === "En Espera",
+      pending: val === "Pendiente",
+      approved: val === "Aprobado",
+      denied: val === "Denegado"
+    });
+  }
+
   render() {
     return (
       <Container>
         <li>{this.props.id}</li>
         <li>{this.props.name}</li>
-        <li>{this.props.estado}</li>
+        <li className={this.state.statusClass}>{this.props.estado}</li>
         <li>{this.props.s1}</li>
         <li>{this.props.s2}</li>
         <li>{this.props.grupo}</li>

@@ -8,8 +8,8 @@ use Slim\Http\Response;
 $app->group('/api', function () use ($app) {
     // Version group
     $app->group('/v1', function () use ($app) {
-      $app->get('/colonos', 'obtenerColonos');
-      $app->get('/empleado/{id}', 'obtenerEmpleado');
+      $app->get('/colonos/{estado},{grupo}', 'obtenerColonos');
+      $app->get('/colonos/{id}', 'obtenerColono');
       $app->post('/crear', 'agregarEmpleado');
       $app->put('/actualizar/{id}', 'actualizarEmpleado');
       $app->delete('/eliminar/{id}', 'eliminarEmpleado');
