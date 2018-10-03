@@ -10,9 +10,9 @@ $app->group('/api', function () use ($app) {
     $app->group('/v1', function () use ($app) {
       $app->get('/colonos/{estado},{grupo}', 'obtenerColonos');
       $app->get('/colonos/{id}', 'obtenerColono');
-      $app->post('/crear', 'agregarEmpleado');
-      $app->put('/actualizar/{id}', 'actualizarEmpleado');
-      $app->delete('/eliminar/{id}', 'eliminarEmpleado');
+      $app->post('/crear', 'agregarColono');
+      $app->put('/actualizar/{id}', 'actualizarColono');
+      $app->delete('/eliminar/{id}', 'eliminarColono');
     });
   });
 

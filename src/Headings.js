@@ -70,19 +70,30 @@ const Container = styled.div`
 class Headings extends React.Component {
   constructor(props) {
     super(props);
+    this.nombre = React.createRef();
+    this.estado = React.createRef();
+    this.grupo = React.createRef();
     this.state = {
-      value: ""
+      nombre: "",
+      estado: "",
+      grupo: ""
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value });
   }
 
   handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
+    if (this.nombre.current.value === "") {
+      // console.log("El input esta vacio... mostrar todos");
+    } else {
+      this.setState(
+        {
+          nombre: this.nombre.current.value
+        },
+        function() {
+          // console.log(this.state);
+          this.props.addFilter(this.state.nombre);
+        }
+      );
+    }
     event.preventDefault();
   }
 
@@ -90,15 +101,15 @@ class Headings extends React.Component {
     return (
       <Container>
         <h1>Inscripciones</h1>
-        <form onSubmit={this.handleSubmit}>
-          <select>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <select ref={this.estado}>
             <option value="todos">Todos</option>
             <option value="0">Pendientes</option>
             <option value="1">Aprobados</option>
             <option value="2">Denegados</option>
             <option value="3">En lista de espera</option>
           </select>
-          <select>
+          <select ref={this.grupo}>
             <option value="todos">Todos</option>
             <option value="0">No especificado</option>
             <option value="1">Grupo 1</option>
@@ -106,11 +117,7 @@ class Headings extends React.Component {
             <option value="3">Grupo 3</option>
             <option value="4">Grupo 4</option>
           </select>
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
+          <input type="text" ref={this.nombre} />
           <button type="submit" value="Enviar">
             <img src={searchIcon} alt="view" />
           </button>

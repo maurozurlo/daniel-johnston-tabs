@@ -70,44 +70,18 @@ function obtenerColonos($request) {
     echo json_encode(cleanUp($res), JSON_PRETTY_PRINT);
 }
 
-function filterByStatusOrGroup($sql,$estado,$grupo){
-    $toAdd = '';
-    if($estado == 'todos')
-        {
-            $foo = true;
-        }
-    else
-        {
-            $foo = false;
-            $toAdd = ' WHERE estado='.$estado;
-        }
-    //Si
-    if($foo)
-    {
-        if($grupo != 'todos')
-        {
-            $toAdd = ' WHERE grupo='.$grupo;
-        }
-    }else{
-        if($grupo != 'todos')
-        {
-            $toAdd = ' AND grupo='.$grupo;
-        }
-    }
-    return $sql = "SELECT id, nombre, apellido, estado, grupo, semana1, semana2, ts FROM colonos".$toAdd;
-}
-
 function obtenerColono($request) {
     global $conn;
     $emp = json_decode($request->getBody());
     $id = $request->getAttribute('id');
 
+    //Chequear si es un ID o un nombre
     if(is_numeric($id)){
         $sql = "SELECT id, nombre, apellido, estado, grupo, semana1, semana2, ts FROM colonos WHERE id=".$id;
     } else{
-        $sql = "SELECT id, nombre, apellido, estado, grupo, semana1, semana2, ts FROM colonos WHERE nombre='".$id."' OR apellido='".$id."'";
+        $search = str_replace(' ','[.]*',$id)."[.]*";
+        $sql = "SELECT id, nombre, apellido, estado, grupo, semana1, semana2, ts FROM colonos WHERE nombre REGEXP'".$search."' OR apellido REGEXP'".$search."'";
     }
-
     $res = array();
     $acentos = mysqli_query($conn,"SET NAMES 'utf8'");
 
@@ -130,6 +104,34 @@ function obtenerColono($request) {
     }else{
         echo 'No existe';
     }
+}
+
+// Filtering
+function filterByStatusOrGroup($sql,$estado,$grupo){
+    $toAdd = '';
+    if($estado == 'todos')
+        {
+            $foo = true;
+        }
+    else
+        {
+            $foo = false;
+            $toAdd = ' WHERE estado='.$estado;
+        }
+    //Si ya filtramos por estado
+    if($foo)
+    {
+        if($grupo != 'todos')
+        {
+            $toAdd = ' WHERE grupo='.$grupo;
+        }
+    }else{
+        if($grupo != 'todos')
+        {
+            $toAdd = ' AND grupo='.$grupo;
+        }
+    }
+    return $sql = "SELECT id, nombre, apellido, estado, grupo, semana1, semana2, ts FROM colonos".$toAdd;
 }
 
 //Cleaning

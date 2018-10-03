@@ -28,19 +28,15 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      table: [
-        {
-          nombre: "No se encontraron resultados"
-        }
-      ]
+      table: "",
+      api:
+        "http://localhost:8888/backoffice-api/public/index.php/api/v1/colonos/todos,todos"
     };
   }
 
   componentDidMount() {
     axios
-      .get(
-        "http://localhost:8888/backoffice-api/public/index.php/api/v1/colonos/todos,todos"
-      )
+      .get(this.state.api)
       .then(res => {
         this.setState({ table: res.data });
       })
@@ -49,31 +45,51 @@ class App extends React.Component {
       });
   }
 
-  render() {
-    const { table } = this.state;
+  handleFilters(filter) {
+    let apiUrl =
+      "http://localhost:8888/backoffice-api/public/index.php/api/v1/colonos/" +
+      filter;
 
+    axios
+      .get(apiUrl)
+      .then(res => {
+        this.setState({ table: res.data });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
+  renderList() {
+    if (this.state.table === "No existe") {
+      return <div>No existe el usuario buscado</div>;
+    } else {
+      if (this.state.table.length > 0) {
+        return this.state.table.map(item => (
+          <TableRow
+            key={item.id}
+            id={item.id}
+            name={item.nombre}
+            estado={item.estado}
+            s1={item.semana1}
+            s2={item.semana2}
+            grupo={item.grupo}
+            ingresado={item.ingresado}
+          />
+        ));
+      }
+    }
+  }
+
+  render() {
     return (
       <Container>
         <SideNav />
         <Main>
-          <Headings />
+          <Headings addFilter={this.handleFilters.bind(this)} />
           <TableTop />
           {/* Mapeado */}
-          <TableList ref={table => (this.table = table)}>
-            {table.length > 0 &&
-              table.map(item => (
-                <TableRow
-                  key={item.id}
-                  id={item.id}
-                  name={item.nombre}
-                  estado={item.estado}
-                  s1={item.semana1}
-                  s2={item.semana2}
-                  grupo={item.grupo}
-                  ingresado={item.ingresado}
-                />
-              ))}
-          </TableList>
+          <TableList>{this.renderList()}</TableList>
         </Main>
       </Container>
     );

@@ -112,8 +112,11 @@ class TableRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      statusClass: this.computeClass(this.props.estado)
+      statusClass: this.computeClass(this.props.estado),
+      value: ""
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   computeClass(val) {
@@ -123,6 +126,13 @@ class TableRow extends React.Component {
       approved: val === "Aprobado",
       denied: val === "Denegado"
     });
+  }
+
+  handleClick(val) {
+    this.setState(state => ({
+      value: val
+    }));
+    alert("A name was submitted: " + val);
   }
 
   render() {
@@ -136,7 +146,11 @@ class TableRow extends React.Component {
         <li>{this.props.grupo}</li>
         <li>{this.props.ingresado}</li>
         <li>
-          <a href={this.props.key}>
+          <a
+            onClick={() => {
+              this.handleClick(this.props.id);
+            }}
+          >
             <img src={searchIcon} alt="view" />
           </a>
           <a>
