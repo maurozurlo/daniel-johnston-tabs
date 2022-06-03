@@ -1,8 +1,494 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,700');
-
-body {
+/*! follow me on bebo http://twitter.com/olegtsaplin */
+*{
+  box-sizing: border-box;
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
-  background-color: #EBF8FF;
-  font-family: "Open Sans", sans-serif;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block
+}
+
+body {
+  line-height: 1;
+}
+
+#root{
+  min-height: 100vh;
+}
+
+ul {
+  list-style: none
+}
+
+blockquote, q {
+  quotes: none
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: '';
+  content: none
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+body {
+  font-family: 'Source Sans Pro', "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  color: #444;
+  line-height: 36px
+}
+
+a {
+  cursor: pointer;
+  color: #505050;
+  -webkit-transition: color 300ms ease-in-out;
+  -moz-transition: color 300ms ease-in-out;
+  -ms-transition: color 300ms ease-in-out;
+  -o-transition: color 300ms ease-in-out;
+  transition: color 300ms ease-in-out
+}
+
+::selection {
+  background: #444;
+  color: white
+}
+
+::-moz-selection {
+  background: #444;
+  color: white
+}
+
+.cf:before, .cf:after {
+  content: " ";
+  display: table
+}
+
+.cf:after {
+  clear: both
+}
+
+.cf {
+  *zoom: 1
+}
+
+h1 {
+  font-size: 44px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 200;
+  letter-spacing: -1px;
+  line-height: 1
+}
+
+p {
+  font-weight: 400;
+  margin-top: 5px;
+  color: #CCCCCC;
+  margin-bottom: 10px
+}
+
+p:last-of-type {
+  margin-bottom: 0
+}
+
+p a {
+  color: #CCCCCC;
+  font-weight: 600
+}
+
+p a:hover {
+  color: #a9a9a9
+}
+
+#tweet {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-weight: 600
+}
+
+#tweet .button {
+  -webkit-border-radius: 34px;
+  border-radius: 34px;
+  padding: 9px 20px 11px 20px;
+  line-height: 1;
+  background: #ea4c89;
+  cursor: pointer;
+  margin-right: 10px;
+  color: white;
+  display: inline-block;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out
+}
+
+#tweet .button:hover {
+  background: #e51e6b
+}
+
+#tweet .count {
+  display: inline-block;
+  color: #CCCCCC
+}
+
+footer {
+  text-align: center;
+  color: #CCCCCC;
+  z-index: 10;
+  line-height: 34px;
+}
+
+footer a {
+  color: #CCCCCC;
+  text-decoration: none
+}
+
+footer a:hover {
+  color: #a9a9a9
+}
+
+footer .modal-toggle {
+  width: 34px;
+  height: 36px;
+  margin-right: 20px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle
+}
+
+footer .modal-toggle .dot {
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 50%;
+  display: inline-block;
+  margin-top: -5px;
+  background: #CCCCCC;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-transition: all 500ms cubic-bezier(0.68, 0, 0.265, 1);
+  -webkit-transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -moz-transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -o-transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55)
+}
+
+footer .modal-toggle .dot1 {
+  left: 0
+}
+
+footer .modal-toggle .dot2 {
+  left: 50%;
+  margin-left: -4px
+}
+
+footer .modal-toggle .dot3 {
+  left: 100%;
+  margin-left: -8px
+}
+
+footer .modal-toggle:hover .dot {
+  background: #a9a9a9
+}
+
+footer .modal-toggle.toggled .dot {
+  background: #a9a9a9
+}
+
+footer .modal-toggle.toggled .dot1 {
+  left: 50%;
+  margin-left: -10px;
+  width: 20px;
+  height: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  margin-top: -1px;
+  -moz-transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  transform: rotate(135deg)
+}
+
+footer .modal-toggle.toggled .dot2 {
+  opacity: 0
+}
+
+footer .modal-toggle.toggled .dot3 {
+  left: 50%;
+  margin-left: -10px;
+  width: 20px;
+  height: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  margin-top: -1px;
+  -moz-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -ms-transform: rotate(-135deg);
+  transform: rotate(-135deg)
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  background: white;
+  z-index: 5;
+  opacity: 0;
+  height: 100%;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  visibility: hidden
+}
+
+.overlay.activated {
+  opacity: 1;
+  visibility: visible
+}
+
+.overlay .readme {
+  width: 300px;
+  line-height: 1.5;
+  text-align: left;
+  font-size: 14px;
+  margin: 0 auto
+}
+
+.overlay .readme p {
+  color: #444;
+  margin-top: 0
+}
+
+.overlay .readme p strong {
+  font-weight: 600
+}
+
+.overlay .readme p.small {
+  font-size: 12px;
+  color: #CCCCCC
+}
+
+.generated {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  color: #CCCCCC;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  opacity: 1
+}
+
+.generated.hidden {
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out
+}
+
+.generated span {
+  color: #444444
+}
+
+pre {
+  font-size: 23px;
+  font-weight: 200;
+  letter-spacing: -1px;
+  line-height: 1;
+  white-space: pre-wrap;
+  max-width: 90%;
+  padding: 10px;
+}
+
+nav {
+  max-height: 7vh;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #CCCCCC;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-center {
+  align-items: center;
+}
+
+ul.navbar {
+  list-style: none;
+  margin: 0 auto;
+  padding: .5em 0;
+  letter-spacing: 2px;
+}
+
+ul.navbar>li>a {
+  text-decoration: none;
+  margin: 10px;
+}
+
+ul.navbar>li>a.active {
+  text-decoration: underline;
+}
+
+ul.navbar>li {
+  float: left;
+}
+
+ul.navbar>li:hover {
+  filter: brightness(1.2);
+}
+
+.container {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  margin-top: 2em;
+}
+
+/*!
+* jQuery Chord Transposer plugin v1.0
+* http://codegavin.com/projects/transposer
+*
+* Copyright 2010, Jesse Gavin
+* Dual licensed under the MIT or GPL Version 2 licenses.
+* http://codegavin.com/license
+*
+* Date: Sat Jun 26 21:27:00 2010 -0600
+*/
+
+span.c {
+  font-weight: bold;
+  color: #e51e6b;
+}
+
+.transpose-keys {
+  overflow: auto;
+  margin: 10px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: wrap;
+}
+
+.transpose-keys a {
+  display: block;
+  float: left;
+  width: 2em;
+  text-align: center;
+  margin: 0 .25em .25em 0;
+  color: #333;
+  background: #eee;
+  text-decoration: none;
+  padding: .4em 0;
+  border: solid 1px transparent;
+  outline: none;
+}
+
+.transpose-keys a.selected {
+  background: #e51e6b;
+  color: #FFF;
+}
+
+
+/* spinner */
+.loader {
+  margin: 100px auto;
+  font-size: 25px;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  -webkit-animation: load5 1.1s infinite ease;
+  animation: load5 1.1s infinite ease;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  transform: scale(.5);
+}
+@-webkit-keyframes load5 {
+  0%,
+  100% {
+    box-shadow: 0em -2.6em 0em 0em #000000, 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.5), -1.8em -1.8em 0 0em rgba(0,0,0, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.7), 1.8em -1.8em 0 0em #000000, 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.5), 1.8em -1.8em 0 0em rgba(0,0,0, 0.7), 2.5em 0em 0 0em #000000, 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.5), 2.5em 0em 0 0em rgba(0,0,0, 0.7), 1.75em 1.75em 0 0em #000000, 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.5), 1.75em 1.75em 0 0em rgba(0,0,0, 0.7), 0em 2.5em 0 0em #000000, -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.5), 0em 2.5em 0 0em rgba(0,0,0, 0.7), -1.8em 1.8em 0 0em #000000, -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.5), -1.8em 1.8em 0 0em rgba(0,0,0, 0.7), -2.6em 0em 0 0em #000000, -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.5), -2.6em 0em 0 0em rgba(0,0,0, 0.7), -1.8em -1.8em 0 0em #000000;
+  }
+}
+@keyframes load5 {
+  0%,
+  100% {
+    box-shadow: 0em -2.6em 0em 0em #000000, 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.5), -1.8em -1.8em 0 0em rgba(0,0,0, 0.7);
+  }
+  12.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.7), 1.8em -1.8em 0 0em #000000, 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.5);
+  }
+  25% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.5), 1.8em -1.8em 0 0em rgba(0,0,0, 0.7), 2.5em 0em 0 0em #000000, 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  37.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.5), 2.5em 0em 0 0em rgba(0,0,0, 0.7), 1.75em 1.75em 0 0em #000000, 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  50% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.5), 1.75em 1.75em 0 0em rgba(0,0,0, 0.7), 0em 2.5em 0 0em #000000, -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  62.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.5), 0em 2.5em 0 0em rgba(0,0,0, 0.7), -1.8em 1.8em 0 0em #000000, -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  75% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.5), -1.8em 1.8em 0 0em rgba(0,0,0, 0.7), -2.6em 0em 0 0em #000000, -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);
+  }
+  87.5% {
+    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.5), -2.6em 0em 0 0em rgba(0,0,0, 0.7), -1.8em -1.8em 0 0em #000000;
+  }
 }
