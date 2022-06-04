@@ -1,0 +1,40 @@
+==Track listing==
+{{Track listing
+| headline = Side one
+| all_writing = [[Daniel Johnston]]. All tracks produced by Johnston
+| total_length = 15:28
+| title1 = Poor You
+| length1 = 2:03
+| title2 = Big Business Monkey
+| length2 = 2:02
+| title3 = Walking the Cow
+| length3 = 3:34
+| title4 = I Picture Myself with a Guitar
+| length4 = 0:45
+| title5 = Despair Came Knocking
+| length5 = 2:44
+| title6 = I Am a Baby (In My Universe)
+| length6 = 1:37
+| title7 = Nervous Love
+| length7 = 0:18
+| title8 = I'll Never Marry
+| length8 = 0:21
+| title9 = Get Yourself Together
+| length9 = 0:32
+| title10 = Running Water
+| length10 = 1:32
+}}
+{{Track listing
+| total_length = 15:10
+| headline = Side two
+| title11 = Desperate Man Blues
+| length11 = 3:40
+| title12 = Hey Joe
+| length12 = 2:44
+| title13 = She Called Pest Control
+| length13 = 0:53
+| title14 = Keep Punching Joe
+| length14 = 3:11
+| title15 = No More Pushing Joe Around
+| length15 = 4:42
+}}

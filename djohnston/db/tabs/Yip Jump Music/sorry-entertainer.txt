@@ -1,0 +1,155 @@
+Sorry Entertainer
+
+This song only uses four strings and requires a good deal of retuning. Comparing to a keyboard or some other instrument makes tuning a bit easier. Use only the four highest strings. 
+
+D string (4th)  tune up to a note between E and F (pretty tight!)
+G String (3rd)  tune up to a note between G and G#
+B string (2nd)  tune down to a note between G# and A
+E string (1st)  tune down to about an A (way down)
+
+I found the 4 individual plucked notes at the beginning and ending of the song really useful for checking the tuning. They should correspond to your four detuned open strings. All the chords are straight bar chords across the 4th, 3rd, and 2nd strings (sometimes he bars across all four...)
+
+I named the cords after the barred fret. 
+So, b2 means X-X-2-2-2-X or X-X-2-2-2-2
+b3 means X-X-3-3-3-X or X-X-3-3-3-3
+etc
+
+"R" means rest - in this case an eighth note rest
+
+I'd be curious to hear if anyone tries this out. This would sound best on a beat up nylon string guitar...
+
+Sorry Entertainer
+
+Intro: pluck through open chord (0)
+Verse: b0-b0-b2-b0-b3-b0-b4-b5 (keep repeating in eighth notes)
+
+Where the wind blows
+That's where I go
+Where the moon is
+That's where I am
+And when I just
+Have a problem
+Always hoping the wind will blow me away again
+
+Chorus: b4-b4-b0-b0-b3-b3-b0-b0 (6 times)
+   b6-b6-b6-b6-b6-b6-b6-b6
+   b5-b5-R-b4-R-b3-R-b2
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+
+Drove those demons
+Out of my head
+With an organ and a pencil full of lead
+And when I'm dead
+I'd like to have it said
+He drove those demons out of his head
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+
+Now the curtain parts the stage
+It's the dawn of a new and exciting age
+And I'm free
+Free at last
+Like a monkey out of its cage
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+(end with the plucked open chord again)
+Quote from: zack26 on January 24, 2007, 05:25:42 PM
+Sorry Entertainer
+
+This song only uses four strings and requires a good deal of retuning. Comparing to a keyboard or some other instrument makes tuning a bit easier. Use only the four highest strings. 
+
+D string (4th)  tune up to a note between E and F (pretty tight!)
+G String (3rd)  tune up to a note between G and G#
+B string (2nd)  tune down to a note between G# and A
+E string (1st)  tune down to about an A (way down)
+
+I found it the 4 individual plucked notes at the beginning and ending of the song really useful for checking the tuning. They should correspond to your four detuned open strings. All the chords are straight bar chords across the 4th, 3rd, and 2nd strings (sometimes he bars across all four...)
+
+I named the cords after the barred fret. 
+So, b2 means X-X-2-2-2-X or X-X-2-2-2-2
+b3 means X-X-3-3-3-X or X-X-3-3-3-3
+etc
+
+I'd be curious to hear if anyone tries this out. This would sound best on a beat up nylon string guitar...
+
+Sorry Entertainer
+
+Intro: pluck through open chord (0)
+Verse: b0-b0-b2-b0-b3-b0-b4-b5 (keep repeating in eighth notes)
+
+Where the wind blows
+That's where I go
+Where the moon is
+That's where I am
+And when I just
+Have a problem
+Always hoping the wind will blow me away again
+
+Chorus: b4-b4-b0-b0-b3-b3-b0-b0 (6 times)
+   b6-b6-b6-b6-b6-b6-b6-b6
+   b5-b5-R-b4-R-b3-R-b2
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+
+Drove those demons
+Out of my head
+With an organ and a pencil full of lead
+And when I'm dead
+I'd like to have it said
+He drove those demons out of his head
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+
+Now the curtain parts the stage
+It's the dawn of a new and exciting age
+And I'm free
+Free at last
+Like a monkey out of its cage
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+(end with the plucked open chord again)
+
+I just banged it out on the piano - these piano chords replicate the guitar part pretty well.
+
+Try playing a single note melody with the left hand:
+Left Hand
+Verse: e - e - f# - e - g - e - g#- a 
+
+With the right hand play two-note half-step clusters. "g/g#" means play g and g# together 
+Right Hand
+Verse: g/g# - g/g# - a/a# - g/g# - a#/b - g/g# - b/c - c/c#
+
+If you play these left and right hand parts together, it sounds pretty cool... 
+
+For the chorus try these left hand and right hand parts together
+
+
+RH: c/c# - c/c# (rest) - (rest) b/c -  b/c  -  (rest) - (rest)
+LH: a  - a  - e  - e - g# -  g#  -   e -   e
+
+(repeat 6 times) then...
+
+RH: c#/d - c#/d - c#/d - c#/d - c#/d - c#/d - c#/d - c#/d 
+LH a# - a# - a# - a# - a# - a# - a# - a# 
+
+RH: c/c#-c/c# - rest - b/c - rest - a#/b - rest - a/a#
+LH: a -  a - rest - g# -rest -  g - rest - f#

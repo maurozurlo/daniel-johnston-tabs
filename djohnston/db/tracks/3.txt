@@ -1,0 +1,46 @@
+== Track listing ==
+{{Track listing
+| all_writing = [[Daniel Johnston]]. All tracks produced by Johnston
+| title1 = Man Obsessed
+| length1 = 1:28
+| title2 = Peek A Boo
+| length2 = 4:50
+| title3 = Never Before, Never Again
+| length3 = 1:48
+| title4 = The Goldfish & The Frog
+| length4 = 2:20
+| title5 = Scuttle-Butt
+| length5 = 2:10
+| title6 = Heart, Mind and Soul
+| length6 = 5:22
+| title7 = Blue Clouds
+| length7 = 5:34
+| title8 = Surely You Don't Work All Night
+| length8 = 4:11
+| title9 = I Can't Think Anymore
+| length9 = 2:21
+| headline = Side One
+| total_length = 30:04
+}}
+{{Track listing
+| title10 = Excuse Me
+| length10 = 0:17
+| total_length = 29:39
+| length11 = 5:28
+| length12 = 3:23
+| length13 = 1:02
+| length14 = 4:16
+| length15 = 4:30
+| length16 = 5:02
+| length17 = 2:47
+| length18 = 2:54
+| title11 = Polka Dot Rag
+| title12 = Why, Without You
+| title13 = An Incoherent Speech
+| title14 = Wicked World
+| title15 = To Go Home
+| title16 = Scrambled Eggs
+| title17 = Peace & Tranquility
+| title18 = When You're Pretty
+| headline = Side Two
+}}

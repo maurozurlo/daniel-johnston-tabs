@@ -1,0 +1,72 @@
+== Track listing ==
+All tracks written and produced by [[Daniel Johnston]].
+
+'''Side one:'''
+
+{{Track listing
+| all_writing = 
+| title1 = Going Down
+| length1 = 2:57
+| title2 = Lost Without a Dame
+| length2 = 2:58
+| title3 = Harley Man
+| length3 = 2:03
+| title4 = Something More
+| length4 = 3:23
+| title5 = Evening Stars
+| length5 = 2:04
+| title6 = Cold Hard World
+| length6 = 3:10
+| title7 = I Had a Dream
+| length7 = 2:40
+| title8 = The Story of an Artist
+| length8 = 5:08
+| title9 = My Yoke Is Heavy
+| length9 = 5:53
+| title10 = 
+| length10 = 
+| total_length = 30:16
+}}
+
+'''Side two:'''
+
+{{Track listing
+| all_writing = 
+| title1 = 
+| length1 = 
+| title2 = 
+| length2 = 
+| title3 = 
+| length3 = 
+| title4 = 
+| length4 = 
+| title5 = 
+| length5 = 
+| title6 = 
+| length6 = 
+| title7 = 
+| length7 = 
+| title8 = 
+| length8 = 
+| title9 = 
+| length9 = 
+| title10 = Stars on Parade
+| length10 = 2:42
+| total_length = 30:21
+| length11 = 4:01
+| length12 = 1:46
+| length13 = 2:50
+| length14 = 4:09
+| length15 = 3:20
+| length16 = 3:12
+| length17 = 4:44
+| length18 = 3:37
+| title11 = And You Love It
+| title12 = I Had Lost My Mind
+| title13 = The Sun Shines Down on Me
+| title14 = Loner
+| title15 = Don't Be Scared
+| title16 = Lullaby
+| title17 = I Was Alone
+| title18 = Mother Mom Said
+}}

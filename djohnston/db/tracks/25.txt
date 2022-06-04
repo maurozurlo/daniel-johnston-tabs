@@ -1,0 +1,17 @@
+{{Track listing
+| title1 = A Recorded Message
+| headline = Side One
+| title2 = Christmas In The Looney Bin
+| title3 = Some People Don't Even Know If It's Christmas Time
+| title4 = Laurie (With Overdubs)
+| title5 = Whiz Kid
+}}{{Track listing
+| headline = Side Two
+| title6 = The Monster Inside of Me
+| title7 = Lennon Song
+| title8 = I Feel So High
+| title9 = Good God
+| title10 = I'm in the Mood
+| title11 = I Get Depressed When You Undress
+| title12 = Lennon Song
+}}

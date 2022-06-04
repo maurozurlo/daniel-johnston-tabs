@@ -1,0 +1,54 @@
+== Track listing ==
+{{Track listing
+| all_writing = [[Daniel Johnston]] except where noted
+| title1 = It's Over
+| length1 = 3:15
+| title2 = Ain't No Woman Gonna Make a George Jones Outta Me
+| length2 = 2:43
+| title3 = Dead Dog Laughing in the Cloud
+| length3 = 2:38
+| title4 = Funeral Home
+| length4 = 0:52
+| title5 = Her Blues
+| length5 = 1:30
+| title6 = Running Water Revisited
+| length6 = 2:09
+| title7 = I Saw Her Standing There
+| length7 = 2:54
+| title8 = Casper the Friendly Ghost
+| length8 = 2:18
+| writer2 = Johnston, Bill Anderson
+| writer7 = [[Lennon-McCartney]]
+| note7 = [[The Beatles]] cover
+| headline = Side One
+| note1 = Ft. Rick Morgan
+| note2 = Ft. Bill Anderson
+| note3 = Ft. Texas Instruments
+| note4 = Ft. Texas Instruments
+| note5 = Ft. Texas Instruments
+| note8 = Ft. Bill Anderson
+| total_length = 18:19
+}}
+{{Track listing
+| title9 = Ghost of Our Love
+| length9 = 1:51
+| title10 = Fly Eye
+| length10 = 1:59
+| total_length = 18:58
+| title11 = Etiquette
+| title12 = A Walk in the Wind
+| title13 = Dem Blues
+| title14 = Girls
+| writer11 = Johnston, Anderson
+| writer12 = 
+| writer13 = 
+| writer14 = 
+| headline = Side Two
+| note9 = Ft. Texas Instruments
+| note11 = Ft. Bill Anderson
+| note14 = Ft. Texas Instruments & Bill Anderson
+| length11 = 2:57
+| length12 = 2:21
+| length13 = 3:20
+| length14 = 6:30
+}}
