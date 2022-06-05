@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-let content = '"id","title","album","track","permalink"'
+let content = '"id","title","album","track"'
 let idx = 0
 
 fs.readdirSync('./', { withFileTypes: true })
@@ -29,17 +29,11 @@ fs.readdirSync('./', { withFileTypes: true })
 
           const album = item.name.split('.txt')[0]
           const track = cleanup.split(' ')[0]
-          const permalink = title
-            .toLowerCase()
-            .replace(/[\s',!\/?\+]/g, '-')
-            .replace(/(-)(?=\1)/gi, '')
-            .replace('&', 'and')
-            .replace(/[\(\)]/g, '')
-          idx++
+          idx++ 
 
           return [
             ...acc,
-            [id, title, album, track, permalink].map((v) => `"${v}"`).join(','),
+            [id, title, album, track].map((v) => `"${v}"`).join(','),
           ]
         },
         [''],

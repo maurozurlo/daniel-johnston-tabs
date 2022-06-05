@@ -1,80 +1,66 @@
 const fs = require('fs')
 const Papa = require('papaparse')
+const { getPermalink } = require('../utils')
 
-const readCSV = async (filePath) => {
-    const csvFile = fs.readFileSync(filePath)
-    const csvData = csvFile.toString()  
-    return new Promise(resolve => {
-      Papa.parse(csvData, {
-        header: true,
-        complete: results => {
-          console.log('Complete', results.data.length, 'records.'); 
-          resolve(results.data);
-        }
-      });
-    });
-  };
-  
-  const test = async () => {
-    let parsedData = await readCSV('./tracks.csv');
-    parsedData.forEach(p => {
-        console.log(p.permalink)
-    })
-  }
-  
-  test()
+let data = []
 
-let content = '"id","title","album","track","permalink"'
+const readCSV = (filePath) => {
+  const csvFile = fs.readFileSync(filePath)
+  const csvData = csvFile.toString()
+  Papa.parse(csvData, {
+    header: true,
+    complete: (results) => {
+      console.log('Complete', results.data.length, 'records.')
+      data = results.data
+    },
+  })
+}
+
+readCSV('../tracks/testdata.csv')
+
+const getRow = (albumId, trackNo) => {
+  return data.find((row) => {
+    return row.album === albumId && row.track === trackNo
+  })
+}
+
+let content = '"id","track_id","author","timestamp","tab", "permalink"\n'
 let idx = 0
 
 fs.readdirSync('./', { withFileTypes: true })
   .filter((f) => f.isDirectory())
   .forEach((folder) => {
-      //Read files inside folder
+    //Read files inside folder
     fs.readdirSync(`./${folder.name}/`, { withFileTypes: true })
       .filter((file) => !file.isDirectory())
       .forEach((item) => {
         if (item.name.indexOf('txt') === -1) return
-        //item.name
-        const allFileContents = fs.readFileSync(`./${folder.name}/${item.name}`, 'utf-8')
-        content += allFileContents
-          .split(/\r?\n/)
-          .reduce(
-            (acc, curr) => {
-              //"1","Grievances","1","1"
-              // Check if usable line
-              //| title1 = Grievances
-              if (curr.indexOf('title') === -1) return acc
-              const cleanup = curr.substring(
-                curr.indexOf('title') + 'title'.length,
-                curr.length,
-              )
-              const id = idx + 1
-              if (!cleanup.split('= ')[1]) return acc
-              const title = cleanup.split('= ')[1].replace(/[\]\[]/g, '')
+        //Read tab
+        const allFileContents = fs.readFileSync(
+          `./${folder.name}/${item.name}`,
+          'utf-8',
+        )
 
-              if (title === '') return acc
-
-              const album = item.name.split('.txt')[0]
-              const track = cleanup.split(' ')[0]
-              const permalink = title
-                .toLowerCase()
-                .replace(/[\s',!\/?\+]/g, '-')
-                .replace(/(-)(?=\1)/gi, '')
-                .replace('&', 'and')
-                .replace(/[\(\)]/g, '')
-              idx++
-
-              return [
-                ...acc,
-                [id, title, album, track, permalink]
-                  .map((v) => `"${v}"`)
-                  .join(','),
-              ]
-            },
-            [''],
+        //Return string
+        const tabData = () => {
+          const trackRecord = getRow(
+            folder.name,
+            item.name.slice(0, item.name.length - 4),
           )
-          .join('\n')
+          const id = idx + 1
+          const track_id = trackRecord.id
+          const author = 1
+          const timestamp = new Date().toJSON().slice(0, 19).replace('T', ' ')
+          const tab = encodeURI(allFileContents)
+          const permalink = getPermalink(trackRecord.title)
+            
+          return `${[id, track_id, author, timestamp, tab, permalink]
+            .map((v) => `"${v}"`)
+            .join(',')}\n`
+        }
+
+        content += tabData()
+        idx++
       })
   })
 

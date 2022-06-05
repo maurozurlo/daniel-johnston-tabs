@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { getPermalink } = require('../utils')
 
 const allFileContents = fs.readFileSync('albums.txt', 'utf-8')
 const content = allFileContents.split(/\r?\n/).reduce(
@@ -8,13 +9,7 @@ const content = allFileContents.split(/\r?\n/).reduce(
     const name = curr.split(' (')[0].replace(/[":]/g, ``)
     const date = `${curr.match(/\d{4}/)[0]}-01-01 00:00:00`
     const featuring = ''
-    const permalink = name
-      .toLowerCase()
-      .replace(/[\s',\/?\+]/g, '-')
-      .replace(/(-)(?=\1)/gi, '')
-      .replace('&', 'and')
-      .replace(/[\(\)\!]/g, '')
-
+    const permalink = getPermalink(name)
     return [
       ...acc,
       [id, name, date, featuring, permalink].map((v) => `"${v}"`).join(','),
