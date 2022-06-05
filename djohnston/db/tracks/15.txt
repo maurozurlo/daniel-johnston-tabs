@@ -43,7 +43,6 @@
 | length16 = 0:56
 | title17 = My Little Girl
 | length17 = 4:08
-| title18 = Rock 'N' Roll/Ega
 | note18 = Ft. Paul Leary & King Coffey
 | length18 = 4:44
 | total_length = 45:53
