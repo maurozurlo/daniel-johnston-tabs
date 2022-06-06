@@ -1,10 +1,13 @@
 import Head from 'next/head'
-import Link from 'next/link'
+//import Link from 'next/link'
 import executeQuery from '../../lib/db'
 import { TTab } from '../../types'
 
 export async function getStaticPaths() {
-  const tabs: Array<{permalink: string}> = await executeQuery(`SELECT tabs.permalink FROM tabs`, null);
+  const tabs = (await executeQuery(
+    `SELECT tabs.permalink FROM tabs`,
+    null
+  )) as Array<{ permalink: string }>
   return {
     paths: tabs.map((tab) => ({ params: { id: tab.permalink } })),
     fallback: false,

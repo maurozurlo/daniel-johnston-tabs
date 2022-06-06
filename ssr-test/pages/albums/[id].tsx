@@ -4,10 +4,11 @@ import executeQuery from '../../lib/db'
 import { TTrack } from '../../types'
 
 export async function getStaticPaths() {
-  const albums: Array<{ permalink: string }> = await executeQuery(
+  const albums = (await executeQuery(
     `SELECT albums.permalink FROM albums`,
     null
-  )
+  )) as Array<{ permalink: string }>;
+
   return {
     paths: albums.map((album) => ({ params: { id: album.permalink } })),
     fallback: false,

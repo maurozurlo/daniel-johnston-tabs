@@ -10,7 +10,7 @@ const db = mysql({
   }
 });
 
-export default async function executeQuery(query, values) {
+export default async function executeQuery(query: string, values?: Array<string> | null) {
   try {
     const results = await db.query(query, values);
     await db.end();
