@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Transition } from '@headlessui/react'
 import Logo from '../public/brand.svg'
+import Search from './Search'
 
 const sections = [
   {
@@ -22,6 +23,7 @@ const sections = [
   {
     name: 'Sign In',
     link: '/sign-in',
+    requireLogin: true
   },
   {
     name: 'Add Tab',
@@ -58,16 +60,17 @@ const Nav = () => {
   return (
     <nav className="bg-slate-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-around h-16">
+        <Image src={Logo} width={120} height={80} layout="intrinsic" />
           <div className="flex items-center">
-
-            <Image src={Logo} width={120} height={80} layout='intrinsic'/>
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <Links />
               </div>
             </div>
           </div>
+
+          <Search />
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -126,7 +129,10 @@ const Nav = () => {
       >
         {(ref) => (
           <div className="md:hidden" id="mobile-menu">
-            <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+            <div
+              ref={ref}
+              className="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col"
+            >
               <Links />
             </div>
           </div>
