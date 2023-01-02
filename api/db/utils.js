@@ -1,3 +1,5 @@
+const fs = require('fs')
+
 const getPermalink = (title) => {
   return title
     .toLowerCase()
@@ -7,7 +9,7 @@ const getPermalink = (title) => {
     .replace('&', 'and')
     .replace(/-+/g, '-')
     .replace(/-$/, '')
-    .trim();
+    .trim()
 }
 
 const getSongKey = (songTab) => {
@@ -46,8 +48,47 @@ const getSongKey = (songTab) => {
   return mostCommonChord
 }
 
+const getTitleAndTrackNumberFromLine = (line) => {
+  //"1","Grievances","1","1"
+  // Check if usable line
+  //| title1 = Grievances
+  if (line.indexOf('title') === -1) return ''
+  const cleanup = line.substring(
+    line.indexOf('title') + 'title'.length,
+    line.length,
+  )
+
+  if (!cleanup.split('= ')[1]) return ''
+  return {
+    title: cleanup.split('= ')[1].replace(/[\][]/g, ''),
+    track: cleanup.split(' ')[0]
+  }
+}
+
+const tryAndGetTab = (fileName) => {
+  try {
+    return fs.readFileSync(
+      fileName,
+      'utf-8',
+    )
+  } catch (err) {
+    return ""
+    // Here you get the error when the file was not found,
+    // but you also get any other error
+  }
+}
+
+const tryAndGetKeyFromFile = (contents) => {
+  const hasManualKey = contents.split(/\r?\n|\r|\n/g)[0].split('Key: ')[1]
+  return {
+    key: hasManualKey ?? getSongKey(contents) ?? 'Unknown',
+    hasManualKey: Boolean(hasManualKey)
+  }
+}
 
 module.exports = {
   getPermalink,
-  getSongKey
+  getTitleAndTrackNumberFromLine,
+  tryAndGetTab,
+  tryAndGetKeyFromFile
 }

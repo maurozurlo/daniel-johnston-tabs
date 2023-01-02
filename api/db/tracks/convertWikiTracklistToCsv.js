@@ -1,42 +1,75 @@
 const fs = require('fs')
 const path = require('path')
-const { getPermalink } = require('../utils')
+const {
+  getPermalink,
+  getTitleAndTrackNumberFromLine,
+  tryAndGetTab,
+  tryAndGetKeyFromFile,
+} = require('../utils')
 
-let content = '"id","title","album","track", "permalink"'
+let content = '"id","title","author","tab","key","permalink"'
+const tracks = {}
 let idx = 0
+
+const removeManualKey = (data, hasKey) => {
+  if(!data) return ''
+  
+  if(hasKey){
+    return data.split('\n').slice(1).join('\n')
+  } 
+  return data
+}
 
 fs.readdirSync('tracks', { withFileTypes: true })
   .filter((item) => !item.isDirectory())
   .forEach((item) => {
     if (item.name.indexOf('txt') === -1) return
     //item.name
-    const allFileContents = fs.readFileSync(path.join('tracks', item.name), 'utf-8')
+    const allFileContents = fs.readFileSync(
+      path.join('tracks', item.name),
+      'utf-8',
+    )
     content += allFileContents
       .split(/\r?\n/)
       .reduce(
         (acc, curr) => {
-          //"1","Grievances","1","1"
-          // Check if usable line
-          //| title1 = Grievances
-          if (curr.indexOf('title') === -1) return acc
-          const cleanup = curr.substring(
-            curr.indexOf('title') + 'title'.length,
-            curr.length,
-          )
           const id = idx + 1
-          if (!cleanup.split('= ')[1]) return acc
-          const title = cleanup.split('= ')[1].replace(/[\][]/g, '')
-
-          if (title === '') return acc
+          const { title, track } = getTitleAndTrackNumberFromLine(curr)
+          if (!title) return acc
 
           const album = item.name.split('.txt')[0]
-          const track = cleanup.split(' ')[0]
           const permalink = getPermalink(title)
-          idx++ 
+
+          const potentialTabFile = path
+            .join(__dirname, '../', 'tabs', album, track)
+            .concat('.txt')
+          const tabData = tryAndGetTab(potentialTabFile)
+
+          // Add link
+          if (tracks[permalink]) {
+            tracks[permalink].links.push({ album, track })
+            return acc
+          } else {
+            tracks[permalink] = {
+              id: tabData ? id : null,
+              links: [{ album, track }],
+            }
+          }
+
+          const author = ''
+          const { key, hasManualKey } = tabData
+            ? tryAndGetKeyFromFile(tabData)
+            : { key: 'Unknown' }
+
+          const tabContent = encodeURI(removeManualKey(tabData, hasManualKey))
+
+          idx++
 
           return [
             ...acc,
-            [id, title, album, track, permalink].map((v) => `"${v}"`).join(','),
+            [id, title, author, tabContent, key, permalink]
+              .map((v) => `"${v}"`)
+              .join(','),
           ]
         },
         [''],
@@ -44,8 +77,37 @@ fs.readdirSync('tracks', { withFileTypes: true })
       .join('\n')
   })
 
-fs.writeFile(path.join(__dirname, '../', 'output', 'tracks.csv'), content, function (err) {
-  if (err) {
-    return console.log(err)
-  }
-})
+const createLinksFile = () => {
+  const links = Object.keys(tracks)
+    .map((track, i) => {
+      return tracks[track].links
+        .map((link, j) => {
+          return [i + j, tracks[track].id, link.album, link.track]
+            .map((v) => `"${v}"`)
+            .join(',')
+        })
+        .join('\n')
+    })
+    .join('\n')
+  return links
+}
+
+fs.writeFileSync(
+  path.join(__dirname, '../', 'output', 'tracks.csv'),
+  content,
+  function (err) {
+    if (err) {
+      return console.log(err)
+    }
+  },
+)
+
+fs.writeFileSync(
+  path.join(__dirname, '../', 'output', 'album_tracks.csv'),
+  '"link_id", "tab_id", "album_id","track_number"\n'.concat(createLinksFile()),
+  function (err) {
+    if (err) {
+      return console.log(err)
+    }
+  },
+)
