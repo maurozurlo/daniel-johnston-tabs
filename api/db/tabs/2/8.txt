@@ -1,0 +1,57 @@
+Key: C
+
+If you just want to strum the chords, then this tab works well. 
+for second chord I can be minor or you can add the 7th.
+
+                C
+Listen up and I'll tell a story
+                Dm7
+About an artist growing old
+Some would try for fame and glory
+           C
+Others aren't so bold
+
+and so on
+
+
+If you want to play the piano melody on guitar this works pretty well.
+
+ 1  2 + 3 + 4 +  1  2  3  4
+E------------------------|  followed by C chord
+B------0--1--0-----------|
+G---------------0--------|
+D------------------2-----|--2--
+A---------------------3--|
+E------------------------|
+
+ 1   2 + 3 + 4 +  1  2  3  4
+E------------------------|  followed by Dm or Dm7
+B------0--1--0-----------|
+G---------------0--------|
+D------------------2--0--|--3--
+A------------------------|
+E------------------------|
+
+Then repeat them in reverse. 
+The whole progression is 
+C Dm7 -Dm7  C
+
+Note: sometimes the Dm7 lick has one note different.
+
+ 1   2 + 3 + 4 +  1  2  3  4
+E------------------------|  followed by Dm or Dm7
+B------0--1--0-----------|
+G---------------1--------|
+D------------------2--0--|--3--
+A------------------------|
+E------------------------|
+
+
+For piano players:
+
+The melody before the first chord is
+B-C-B-G-E-C-E
+The melody before the second chord is
+B-C-B-G-E-D-F 
+and sometimes
+B-C-B-A-E-D-F

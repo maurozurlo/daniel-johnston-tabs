@@ -7,31 +7,49 @@ import { parseTab } from '../../utils/parser'
 import { useState } from 'react'
 
 export async function getStaticPaths() {
-  const tabs = (await executeQuery(
-    `SELECT tabs.permalink FROM tabs`,
+  const data = (await executeQuery(
+    `SELECT permalink FROM tracks`,
     null
   )) as Array<{ permalink: string }>
+  const paths = data.map((tab) => ({ params: { id: tab.permalink } }))
   return {
-    paths: tabs.map((tab) => ({ params: { id: tab.permalink } })),
+    paths,
     fallback: false,
   }
 }
 
+
 export async function getStaticProps({ params }: { params: { id: string } }) {
   const tabData = await executeQuery(
-    `SELECT tabs.id, tracks.title AS trackTitle, tracks.id AS trackId,
-    tabs.author AS authorId, users.username AS authorName, 
-    albums.name AS albumName, albums.id as albumId, 
-    albums.permalink AS albumPermalink, tabs.permalink, tabs.tab
-    FROM tabs
-    INNER JOIN tracks ON tabs.track_id=tracks.id
-    JOIN albums ON tracks.album=albums.id 
-    JOIN users ON users.id=tabs.author
-    WHERE tabs.permalink=?`,
+    `SELECT 
+    t.id AS tabId,
+    tr.title AS trackTitle, 
+    t.tab, 
+    t.key AS tabKey, 
+    a.name AS albumName,
+    tr.track AS trackNumber
+    FROM tabs t
+    JOIN tracks tr ON t.track_id = tr.id
+    JOIN albums a ON tr.album = a.id
+    WHERE tr.permalink = ?`,
     [params.id]
   )
-  const [tab] = JSON.parse(JSON.stringify(tabData))
-  return { props: { tab } }
+  const defaultValue = {
+    id: 0,
+    trackTitle: "",
+    trackId: 0,
+    authorId: 0,
+    authorName: "",
+    tabKey: "Unknown",
+    albumName: "",
+    albumId: 0,
+    albumPermalink: "",
+    permalink: "",
+    tab: ""
+  }
+  const [data] = JSON.parse(JSON.stringify(tabData))
+
+  return { props: { data: Object.keys(data ?? {}).length ? data : defaultValue } }
 }
 
 const LyricLine: React.VFC<{
@@ -39,13 +57,13 @@ const LyricLine: React.VFC<{
     text?: string
     spaces?: number
     chord: boolean
-  };
-  isLastInLine: boolean;
+  }
+  isLastInLine: boolean
 }> = ({ line, isLastInLine }) => {
   if (line.chord) {
     return (
       <>
-      <span>{' '.repeat(line.spaces || 0)}</span>
+        <span>{' '.repeat(line.spaces || 0)}</span>
         <span className="font-bold text-red-600">{line.text}</span>
         {isLastInLine && <br />}
       </>
@@ -59,25 +77,33 @@ const LyricLine: React.VFC<{
   )
 }
 
-export default function Tab({ tab }: { tab: TTab }) {
-  const [parsedData, setParsedData] = useState(
-    parseTab(decodeURI(tab.tab)) ?? []
-  )
+const Tab: React.VFC<{ data: TTab }> = ({
+  data: { tab, trackTitle, tabKey },
+}) => {
+  const [parsedData, setParsedData] = useState(parseTab(decodeURI(tab)) ?? [])
 
   return (
     <>
       <Head>
-        <title>{tab.trackTitle && tab.trackTitle}</title>
+        <title>{trackTitle}</title>
       </Head>
-      <h1 className="text-3xl text-slate-800 text-center mb-2">
-        {tab.trackTitle}
-      </h1>
-      <Transposer songKey="C" transposeSong={(newKey) => alert(newKey)} />
+      <h1 className="text-3xl text-slate-800 text-center mb-2">{trackTitle}</h1>
+      {tabKey !== 'Unknown' && (
+        <Transposer songKey="C" transposeSong={(newKey) => alert(newKey)} />
+      )}
       <pre style={{ overflowX: 'scroll' }}>
         {parsedData.map((lines, i) =>
-          lines.map((line, j) => <LyricLine key={`${i}-${j}`} line={line} isLastInLine={j === lines.length - 1} />)
+          lines.map((line, j) => (
+            <LyricLine
+              key={`${i}-${j}`}
+              line={line}
+              isLastInLine={j === lines.length - 1}
+            />
+          ))
         )}
       </pre>
     </>
   )
 }
+
+export default Tab

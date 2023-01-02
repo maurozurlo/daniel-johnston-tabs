@@ -7,7 +7,7 @@ export async function getStaticPaths() {
   const albums = (await executeQuery(
     `SELECT albums.permalink FROM albums`,
     null
-  )) as Array<{ permalink: string }>;
+  )) as Array<{ permalink: string }>
 
   return {
     paths: albums.map((album) => ({ params: { id: album.permalink } })),
@@ -17,12 +17,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
   const albumData = await executeQuery(
-    `SELECT tracks.id, tracks.title, tracks.album, 
-    tracks.track, albums.name, albums.id as albumId, tabs.permalink AS tabLink
-    FROM albums 
-    INNER JOIN tracks ON tracks.album=albums.id 
-    LEFT JOIN tabs ON tracks.id=tabs.track_id
-    WHERE albums.permalink=?`,
+    `SELECT a.name AS albumName, t.title AS trackTitle, t.permalink, 
+    (SELECT COUNT(*) FROM tracks WHERE permalink = t.permalink AND id != t.id) AS permalinkExists
+FROM albums a
+JOIN tracks t ON a.id = t.album
+WHERE a.permalink = ?
+ORDER BY t.track ASC`,
     [params.id]
   )
   const tracks = JSON.parse(JSON.stringify(albumData))
@@ -34,25 +34,25 @@ export default function Album({ tracks }: { tracks: TTrack[] }) {
   return (
     <>
       <Head>
-        <title>{tracks && tracks[0]?.name}</title>
+        <title>{tracks && tracks[0]?.albumName}</title>
       </Head>
       <h1 className="text-lg text-slate-800 font-bold">
-        {tracks && tracks[0]?.name}
+        {tracks && tracks[0]?.albumName}
       </h1>
       <ol>
         {tracks &&
-          tracks.map((e) => {
+          tracks.map((e, i) => {
             return (
-              <li key={e.id}>
-                {e.track} -{' '}
-                {e.tabLink ? (
-                  <Link href={`/songs/${e.tabLink}`}>
+              <li key={i}>
+                {i + 1} -{' '}
+                {!e.permalinkExists ? (
+                  <Link href={`/songs/${e.permalink}`}>
                     <a className="underline text-slate-600 hover:text-slate-800">
-                      {e.title}
+                      {e.trackTitle}
                     </a>
                   </Link>
                 ) : (
-                  <>{e.title}</>
+                  <>{e.trackTitle}</>
                 )}
               </li>
             )

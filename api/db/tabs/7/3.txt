@@ -1,0 +1,101 @@
+Key: G
+
+Original tuning:
+E G E G# G# A
+D string (4th)  tune up to a note between E and F (pretty tight!)
+G String (3rd)  tune up to a note between G and G#
+B string (2nd)  tune down to a note between G# and A
+E string (1st)  tune down to about an A (way down)
+
+Tabbed for standard tuning:
+
+Intro: pluck through open chord
+G
+
+G G A G Bb G 
+Verse:
+keep repeating in eighth notes
+G-G-A-G-Bb-G-B-C
+
+Where the wind blows
+That's where I go
+Where the moon is
+That's where I am
+And when I just
+Have a problem
+Always hoping the wind will blow me away again
+
+Chorus:
+B-B-G-G-Bb-Bb-G-G
+B-B-G-G-Bb-Bb-G-G
+B-B-G-G-Bb-Bb-G-G
+B-B-G-G-Bb-Bb-G-G
+B-B-G-G-Bb-Bb-G-G
+B-B-G-G-Bb-Bb-G-G
+Db-Db-Db-Db-Db-Db-Db-Db
+C-C-R-B-R-Bb-R-A
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+
+Drove those demons
+Out of my head
+With an organ and a pencil full of lead
+And when I'm dead
+I'd like to have it said
+He drove those demons out of his head
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+
+Now the curtain parts the stage
+It's the dawn of a new and exciting age
+And I'm free
+Free at last
+Like a monkey out of its cage
+
+I'm a loner
+I'm a sorry entertainer
+I'm a loner
+I'm a sorry entertainer
+
+-----------------------
+
+Another version:
+I just banged it out on the piano - these piano chords replicate the guitar part pretty well.
+
+Try playing a single note melody with the left hand:
+Left Hand
+Verse: 
+E E F# E G E G# A 
+
+With the right hand play two-note half-step clusters. i.e G/G# means play G and G# at the same time.
+
+Right Hand
+Verse: 
+G/G# G/G# A/A# G/G# A#/B G/G# B/C C/C#
+
+If you play these left and right hand parts together, it sounds pretty cool... 
+
+For the chorus try these left hand and right hand parts together
+
+RH: 
+C/C# C/C# B/C B/C
+LH: 
+A A  E  E G# G#  E  E
+
+(repeat 6 times) then...
+
+RH: 
+C#/D C#/D C#/D C#/D C#/D C#/D C#/D C#/D 
+LH: 
+A# A# A# A# A# A# A# A# 
+
+RH: 
+C/C# C/C# B/C A#/B A/A#
+LH: 
+A A G# G F#
