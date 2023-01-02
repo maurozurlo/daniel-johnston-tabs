@@ -17,12 +17,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
   const albumData = await executeQuery(
-    `SELECT a.name AS albumName, t.title AS trackTitle, t.permalink, 
-    (SELECT COUNT(*) FROM tracks WHERE permalink = t.permalink AND id != t.id) AS permalinkExists
-FROM albums a
-JOIN tracks t ON a.id = t.album
-WHERE a.permalink = ?
-ORDER BY t.track ASC`,
+    `SELECT a.name AS albumName, t.title AS trackTitle, t.permalink AS trackPermalink, 
+    at.track_number AS trackNumber, at.tabbed
+    FROM albums a
+    JOIN album_tracks at ON a.id = at.album_id
+    JOIN tracks t ON at.tab_id = t.id
+    WHERE a.permalink = ?;`,
     [params.id]
   )
   const tracks = JSON.parse(JSON.stringify(albumData))
@@ -45,8 +45,8 @@ export default function Album({ tracks }: { tracks: TTrack[] }) {
             return (
               <li key={i}>
                 {i + 1} -{' '}
-                {!e.permalinkExists ? (
-                  <Link href={`/songs/${e.permalink}`}>
+                {e.tabbed ? (
+                  <Link href={`/songs/${e.trackPermalink}`}>
                     <a className="underline text-slate-600 hover:text-slate-800">
                       {e.trackTitle}
                     </a>

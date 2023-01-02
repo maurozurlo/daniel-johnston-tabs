@@ -51,7 +51,8 @@ fs.readdirSync('tracks', { withFileTypes: true })
             return acc
           } else {
             tracks[permalink] = {
-              id: tabData ? id : null,
+              id,
+              tab: tabData ? 1 : 0,
               links: [{ album, track }],
             }
           }
@@ -64,10 +65,9 @@ fs.readdirSync('tracks', { withFileTypes: true })
           const tabContent = encodeURI(removeManualKey(tabData, hasManualKey))
 
           idx++
-
           return [
             ...acc,
-            [id, title, author, tabContent, key, permalink]
+            [id, title, author, tabContent, key || 'Unknown', permalink]
               .map((v) => `"${v}"`)
               .join(','),
           ]
@@ -82,7 +82,7 @@ const createLinksFile = () => {
     .map((track, i) => {
       return tracks[track].links
         .map((link, j) => {
-          return [i + j, tracks[track].id, link.album, link.track]
+          return [i + j + 1, tracks[track].id, link.album, link.track, tracks[track].tab]
             .map((v) => `"${v}"`)
             .join(',')
         })
@@ -104,7 +104,7 @@ fs.writeFileSync(
 
 fs.writeFileSync(
   path.join(__dirname, '../', 'output', 'album_tracks.csv'),
-  '"link_id", "tab_id", "album_id","track_number"\n'.concat(createLinksFile()),
+  '"link_id", "tab_id", "album_id","track_number", "tabbed"\n'.concat(createLinksFile()),
   function (err) {
     if (err) {
       return console.log(err)

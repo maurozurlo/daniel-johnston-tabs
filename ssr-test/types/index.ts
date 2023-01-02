@@ -9,24 +9,19 @@ export type TAlbum = {
 export type TTrack = {
   trackTitle: string;
   albumName: string;
-  track: number;
-  permalink: string;
-  albumId: number;
-  permalinkExists: string;
+  trackNumber: number;
+  trackPermalink: string;
+  tabbed: number;
 }
 
 export type TTab = {
-  id: number
-  trackTitle: string
-  trackId: number
-  authorId: number
-  authorName: string
-  tabKey: string
   albumName: string
-  albumId: number
   albumPermalink: string
-  permalink: string
+  albumReleased: string
+  trackTitle: string
   tab: string
+  key: string
+  trackNumber: number
 }
 
 export type TKey = 'Ab' | 'A' | 'A#' | 'Bb' | 'B' | 'C' | 'C#' | 'Db' | 'D' | 'D#' | 'Eb' | 'E' | 'F' | 'F#' | 'Gb' | 'G' | 'G#'

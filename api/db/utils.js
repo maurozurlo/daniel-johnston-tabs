@@ -59,9 +59,11 @@ const getTitleAndTrackNumberFromLine = (line) => {
   )
 
   if (!cleanup.split('= ')[1]) return ''
+  const title = cleanup.split('= ')[1].replace(/[\][]/g, '');
+  const track = cleanup.split(' ')[0];
   return {
-    title: cleanup.split('= ')[1].replace(/[\][]/g, ''),
-    track: cleanup.split(' ')[0]
+    title,
+    track
   }
 }
 
@@ -81,7 +83,7 @@ const tryAndGetTab = (fileName) => {
 const tryAndGetKeyFromFile = (contents) => {
   const hasManualKey = contents.split(/\r?\n|\r|\n/g)[0].split('Key: ')[1]
   return {
-    key: hasManualKey ?? getSongKey(contents) ?? 'Unknown',
+    key: hasManualKey || getSongKey(contents) || 'Unknown',
     hasManualKey: Boolean(hasManualKey)
   }
 }
