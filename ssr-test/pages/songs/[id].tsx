@@ -31,7 +31,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     [params.id]
   )
 
-  const defaultValue = {
+  const defaultValue = [{
     albumName: "Unknown",
     albumPermalink: "404",
     albumReleased: "1990",
@@ -39,7 +39,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     tab: "",
     key: "Unknown",
     trackNumber: 0
-  }
+  }]
 
   const data = JSON.parse(JSON.stringify(tabData))
   return { props: { data: Object.keys(data ?? {}).length ? data : defaultValue } }
