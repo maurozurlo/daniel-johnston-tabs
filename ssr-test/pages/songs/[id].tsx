@@ -30,8 +30,19 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     WHERE t.permalink = ?;`,
     [params.id]
   )
+
+  const defaultValue = {
+    albumName: "Unknown",
+    albumPermalink: "404",
+    albumReleased: "1990",
+    trackTitle: "Unknown",
+    tab: "",
+    key: "Unknown",
+    trackNumber: 0
+  }
+
   const data = JSON.parse(JSON.stringify(tabData))
-  return { props: { data } }
+  return { props: { data: Object.keys(data ?? {}).length ? data : defaultValue } }
 }
 
 const LyricLine: React.VFC<{
