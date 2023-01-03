@@ -34,4 +34,10 @@ export interface TKeyValue {
   type: TNote
 }
 
+export type TSearch = {
+  name: string,
+  permalink: string,
+  type: string
+}
+
 export type TKeys = Array<TKeyValue>

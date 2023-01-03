@@ -31,18 +31,22 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     [params.id]
   )
 
-  const defaultValue = [{
-    albumName: "Unknown",
-    albumPermalink: "404",
-    albumReleased: "1990",
-    trackTitle: "Unknown",
-    tab: "",
-    key: "Unknown",
-    trackNumber: 0
-  }]
+  const defaultValue = [
+    {
+      albumName: 'Unknown',
+      albumPermalink: '404',
+      albumReleased: '1990',
+      trackTitle: 'Unknown',
+      tab: '',
+      key: 'Unknown',
+      trackNumber: 0,
+    },
+  ]
 
   const data = JSON.parse(JSON.stringify(tabData))
-  return { props: { data: Object.keys(data ?? {}).length ? data : defaultValue } }
+  return {
+    props: { data: Object.keys(data ?? {}).length ? data : defaultValue },
+  }
 }
 
 const LyricLine: React.VFC<{
@@ -86,26 +90,33 @@ const Tab: React.VFC<{ data: TTab[] }> = ({ data }) => {
       {data[0].key !== 'Unknown' && (
         <Transposer songKey="C" transposeSong={(newKey) => alert(newKey)} />
       )}
-      <pre style={{ overflowX: 'scroll' }}>
-        {parsedData.map((lines, i) =>
-          lines.map((line, j) => (
-            <LyricLine
-              key={`${i}-${j}`}
-              line={line}
-              isLastInLine={j === lines.length - 1}
-            />
-          ))
-        )}
-      </pre>
+      {data[0].tab ? (
+        <pre style={{ overflowX: 'scroll' }}>
+          {parsedData.map((lines, i) =>
+            lines.map((line, j) => (
+              <LyricLine
+                key={`${i}-${j}`}
+                line={line}
+                isLastInLine={j === lines.length - 1}
+              />
+            ))
+          )}
+        </pre>
+      ) : (
+        <p className="text-sm text-gray-600">
+          No tab found for this song. Maybe add one?
+        </p>
+      )}
 
-      <hr className='my-4' />
+      <hr className="my-4" />
       <h2>Appears on:</h2>
       <ul>
         {data.map((row, i) => (
           <li key={i}>
             <Link href={`/albums/${row.albumPermalink}`}>
               <a className="underline text-slate-600 hover:text-slate-800">
-                {row.trackNumber} - {row.albumName} ({new Date(Date.parse(row.albumReleased)).getFullYear()})
+                {row.trackNumber} - {row.albumName} (
+                {new Date(Date.parse(row.albumReleased)).getFullYear()})
               </a>
             </Link>
           </li>
