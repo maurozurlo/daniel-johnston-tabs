@@ -20,7 +20,7 @@ export type TTab = {
   albumReleased: string
   trackTitle: string
   tab: string
-  key: string
+  key: TKey | 'Unknown'
   trackNumber: number
 }
 

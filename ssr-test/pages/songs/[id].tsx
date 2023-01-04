@@ -6,6 +6,7 @@ import { TTab } from '../../types'
 import { parseTab } from '../../utils/parser'
 import { useState } from 'react'
 import Link from 'next/link'
+import { transposeSong } from '../../utils/transpose'
 
 export async function getStaticPaths() {
   const data = (await executeQuery(
@@ -78,6 +79,13 @@ const Tab: React.VFC<{ data: TTab[] }> = ({ data }) => {
   const [parsedData, setParsedData] = useState(
     parseTab(decodeURI(data[0].tab)) ?? []
   )
+  const [songKey, setSongKey] = useState<string>(data[0].key)
+
+  const handleChangeKey = (newKey: string) => {
+    const data = transposeSong(parsedData, songKey, newKey)
+    setParsedData(data)
+    setSongKey(newKey)
+  }
 
   return (
     <>
@@ -88,7 +96,10 @@ const Tab: React.VFC<{ data: TTab[] }> = ({ data }) => {
         {data[0].trackTitle}
       </h1>
       {data[0].key !== 'Unknown' && (
-        <Transposer songKey="C" transposeSong={(newKey) => alert(newKey)} />
+        <Transposer
+          songKey={songKey}
+          transposeSong={(newKey) => handleChangeKey(newKey)}
+        />
       )}
       {data[0].tab ? (
         <pre style={{ overflowX: 'scroll' }}>
