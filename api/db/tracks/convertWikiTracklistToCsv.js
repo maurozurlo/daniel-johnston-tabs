@@ -34,10 +34,11 @@ fs.readdirSync('tracks', { withFileTypes: true })
       .reduce(
         (acc, curr) => {
           const id = idx + 1
-          const { title, track } = getTitleAndTrackNumberFromLine(curr)
-          if (!title) return acc
-
           const album = item.name.split('.txt')[0]
+
+          const { title, track } = getTitleAndTrackNumberFromLine(curr, album)
+          if (!title) return acc
+          
           const permalink = getPermalink(title)
 
           const potentialTabFile = path
@@ -47,9 +48,11 @@ fs.readdirSync('tracks', { withFileTypes: true })
 
           // Add link
           if (tracks[permalink]) {
+            //console.log('Following track is dup:', permalink, album, track)
             tracks[permalink].links.push({ album, track })
             return acc
           } else {
+            //console.log('Following track is init:', permalink, album, track)
             tracks[permalink] = {
               id,
               tab: tabData ? 1 : 0,
@@ -77,20 +80,24 @@ fs.readdirSync('tracks', { withFileTypes: true })
       .join('\n')
   })
 
-const createLinksFile = () => {
-  const links = Object.keys(tracks)
-    .map((track, i) => {
-      return tracks[track].links
-        .map((link, j) => {
-          return [i + j + 1, tracks[track].id, link.album, link.track, tracks[track].tab]
-            .map((v) => `"${v}"`)
-            .join(',')
-        })
-        .join('\n')
-    })
-    .join('\n')
-  return links
-}
+  const createLinksFile = () => {
+    let idx = 0;
+    const links = Object.keys(tracks).map((track, i) => {
+      return tracks[track].links.map((trackLink, j) => {
+        idx++
+        return createCsvRow(idx, tracks[track].id, trackLink.album, trackLink.track, tracks[track].tab);
+      }).join('\n');
+    }).join('\n');
+    return links;
+  }
+  
+  const createCsvRow = (index, trackId, album, track, tab) => {
+    const row = [index, trackId, album, track, tab]
+      .map((value) => `"${value}"`)
+      .join(',');
+    return row;
+  }
+  
 
 fs.writeFileSync(
   path.join(__dirname, '../', 'output', 'tracks.csv'),
